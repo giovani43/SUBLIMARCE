@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S U B L I M A R C E - Tus Ideas Hechas Realidad</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Colores para modo claro (predeterminados o extendidos)
+                        'light-primary': '#007BFF', // Azul para títulos (cambiado)
+                        'light-secondary': '#4ECDC4',
+                        'light-text': '#333333',
+                        'light-bg': '#fdfdfd',
+                        'light-bg-alt': '#f0f0f0',
+                        'light-card-bg': '#ffffff',
+                        // Colores para modo oscuro
+                        'dark-primary': '#A05CF0', // Violeta para títulos
+                        'dark-secondary': '#8E7AF7',
+                        'dark-text': '#E0BBE4', // Lila claro para texto
+                        'dark-bg': '#1E1B29',
+                        'dark-bg-alt': '#2C283E',
+                        'dark-card-bg': '#3B344D',
+                    }
+                },
+                fontFamily: {
+                    sans: ['Poppins', 'sans-serif'],
+                },
+            },
+            darkMode: 'class', // Habilitar modo oscuro basado en clase
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            /* Estilos base y específicos que no se manejan fácilmente con clases de Tailwind o para sobreescribir */
+            body {
+                @apply bg-light-bg text-light-text transition-colors duration-300 ease-in-out;
+                line-height: 1.7;
+            }
+
+            body.dark {
+                @apply bg-dark-bg text-dark-text;
+            }
+
+            #inicio {
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                    url('gorranegra.webp') no-repeat center center/cover;
+                @apply text-white;
+            }
+
+            /* Encabezado */
+            #main-header,
+            #cart-header, /* Estilo general para headers */
+            #account-header {
+                @apply fixed top-0 left-0 w-full z-50 shadow-lg transition-colors duration-300 ease-in-out;
+                background: rgba(253, 253, 253, 0.9);
+                /* bg-light-header con opacidad */
+                backdrop-filter: blur(5px); /* Añadimos un ligero desenfoque */
+            }
+
+            body.dark #main-header,
+            body.dark #cart-header,
+            body.dark #account-header {
+                background: rgba(30, 27, 41, 0.9);
+                /* bg-dark-header con opacidad */
+            }
+
+            #logo a {
+                @apply text-2xl font-bold text-light-text transition-colors duration-300 ease-in-out;
+            }
+
+            body.dark #logo a {
+                @apply text-dark-text;
+            }
+
+            #logo a:hover {
+                @apply text-light-primary;
+            }
+
+            body.dark #logo a:hover {
+                @apply text-dark-primary;
+            }
+
+            /* Estilos para los enlaces de navegación */
+            #main-header nav ul li a {
+                @apply text-light-text font-semibold py-2 px-3 rounded-md transition-colors duration-300 ease-in-out lg:px-4;
+            }
+
+
+            body.dark #main-header nav ul li a {
+                @apply text-dark-text;
+            }
+
+            #main-header nav ul li a:hover,
+            #main-header nav ul li a.active {
+                @apply text-light-primary;
+            }
+
+            body.dark #main-header nav ul li a:hover,
+            body.dark #main-header nav ul li a.active {
+                @apply text-dark-primary;
+            }
+
+
+            #darkModeToggle {
+                @apply bg-transparent border-none text-light-text text-2xl cursor-pointer p-2 transition-colors duration-300 ease-in-out;
+            }
+
+            body.dark #darkModeToggle {
+                @apply text-dark-text;
+            }
+
+            #darkModeToggle:hover {
+                @apply text-light-primary;
+            }
+
+            body.dark #darkModeToggle:hover {
+                @apply text-dark-primary;
+            }
+
+            /* Secciones */
+            .section-title {
+                @apply text-3xl font-bold mb-4 text-light-primary sm:text-4xl;
+            }
+
+            body.dark .section-title {
+                @apply text-dark-primary;
+            }
+
+            .section-subtitle {
+                /* Para subtítulos dentro de las secciones si los hubiera */
+                @apply text-xl mb-8 text-light-primary;
+            }
+
+            body.dark .section-subtitle {
+                @apply text-dark-primary;
+            }
+
+            /* Hero Section */
+            #inicio {
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                    url('gorranegra.webp') no-repeat center center/cover;
+                @apply text-white;
+            }
+
+            #inicio .hero-title {
+                /* Título principal del Hero */
+                @apply text-4xl font-bold text-white mb-2 sm:text-5xl lg:text-6xl;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+            #inicio .slogan {
+                @apply text-lg mb-8 font-light sm:text-xl;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            }
+
+            .cta-button {
+                @apply inline-block bg-light-primary text-white py-3 px-8 rounded-full text-lg font-semibold shadow-md transition-all duration-300 ease-in-out;
+            }
+
+            .cta-button:hover {
+                @apply bg-light-secondary transform -translate-y-1;
+            }
+
+            body.dark .cta-button {
+                @apply bg-dark-primary;
+            }
+
+            body.dark .cta-button:hover {
+                @apply bg-dark-secondary;
+            }
+
+             /* Tarjetas de Producto (Estilo base) */
+            .product-card {
+                @apply bg-light-card-bg rounded-lg p-6 shadow-lg transition-all duration-300 ease-in-out text-left flex flex-col;
+            }
+
+            .product-card:hover {
+                @apply transform -translate-y-2 shadow-xl;
+            }
+
+            body.dark .product-card {
+                @apply bg-dark-card-bg;
+            }
+
+            .product-card img {
+                @apply w-full h-48 object-cover rounded-md mb-4; /* Adjusted image height */
+            }
+
+            .product-card h3 {
+                /* Título del producto en la tarjeta */
+                @apply text-xl font-semibold mb-2 text-light-primary;
+            }
+
+            body.dark .product-card h3 {
+                @apply text-dark-primary;
+            }
+
+            .product-card p {
+                /* Descripción del producto */
+                @apply text-sm mb-4 text-light-text opacity-90 flex-grow; /* Added flex-grow */
+            }
+
+            body.dark .product-card p {
+                @apply text-dark-text;
+            }
+
+            .product-card .precio {
+                @apply font-semibold text-lg text-light-secondary mb-4;
+            }
+
+            body.dark .product-card .precio {
+                @apply text-dark-secondary;
+            }
+
+            .btn-consultar {
+                @apply inline-block bg-light-secondary text-white py-2 px-5 rounded-full font-semibold transition-all duration-300 ease-in-out text-center;
+            }
+
+            .btn-consultar:hover {
+                @apply bg-light-primary;
+            }
+
+            body.dark .btn-consultar {
+                @apply bg-dark-secondary;
+            }
+
+            body.dark .btn-consultar:hover {
+                @apply bg-dark-primary;
+            }
+
+
+            /* Nota de precios */
+            .nota-precios {
+                @apply mt-8 italic text-sm opacity-80;
+            }
+
+            /* Sección Cómo Pedir */
+            .steps-list li {
+                @apply bg-light-card-bg p-5 mb-4 rounded-lg shadow-md flex items-center transition-transform duration-200 ease-in-out hover:translate-x-1;
+            }
+
+            body.dark .steps-list li {
+                @apply bg-dark-card-bg;
+            }
+
+            .steps-list li span {
+                @apply bg-light-primary text-white rounded-full w-10 h-10 inline-flex justify-center items-center font-bold text-lg mr-5 flex-shrink-0;
+            }
+
+            body.dark .steps-list li span {
+                @apply bg-dark-primary;
+            }
+
+            .steps-list li strong {
+                @apply text-light-secondary mr-1;
+            }
+
+            body.dark .steps-list li strong {
+                @apply text-dark-secondary;
+            }
+
+             /* Footer */
+            footer {
+                @apply bg-light-bg-alt text-light-text py-12 text-center;
+            }
+
+            body.dark footer {
+                @apply bg-dark-bg-alt text-dark-text;
+            }
+
+            .contact-info p i {
+                @apply text-light-primary mr-2;
+            }
+
+            body.dark .contact-info p i {
+                @apply text-dark-primary;
+            }
+
+            .contact-info a {
+                @apply text-light-text transition-colors duration-300 ease-in-out;
+            }
+
+            body.dark .contact-info a {
+                @apply text-dark-text;
+            }
+
+            .contact-info a:hover {
+                @apply text-light-primary;
+            }
+
+            body.dark .contact-info a:hover {
+                @apply text-dark-primary;
+            }
+
+            .social-media a {
+                @apply text-light-text text-2xl mx-3 transition-all duration-300 ease-in-out;
+            }
+
+            body.dark .social-media a {
+                @apply text-dark-text;
+            }
+
+            .social-media a:hover {
+                @apply text-light-primary transform -translate-y-1;
+            }
+
+            body.dark .social-media a:hover {
+                @apply text-dark-primary;
+            }
+
+            .copyright {
+                @apply mt-5 text-sm opacity-70;
+            }
+
+
+            /* Adjustment for fixed header */
+            .section-padding-top {
+                padding-top: 80px; /* Adjust based on header height */
+            }
+
+            @media (min-width: 768px) {
+                .section-padding-top {
+                    padding-top: 90px; /* Adjust for potentially taller header on desktop */
+                }
+            }
+
+            /* --- Estilos Específicos del Carrito (cart.html) --- */
+            /* (Mantener si no se consolidan en style.css) */
+             .cart-section-title {
+                @apply text-2xl font-bold mb-6 text-light-primary dark:text-dark-primary;
+            }
+
+            .cart-table {
+                @apply w-full table-auto border-collapse;
+            }
+
+            .cart-table th,
+            .cart-table td {
+                @apply border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-left;
+            }
+
+            .cart-table th {
+                @apply font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-dark-bg-alt;
+            }
+
+             .cart-table tbody tr:hover {
+                @apply bg-gray-50 dark:bg-dark-card-bg;
+            }
+
+            .cart-item-details {
+                @apply flex items-center;
+            }
+
+            .cart-item-details img {
+                @apply w-16 h-16 object-cover rounded mr-4;
+            }
+
+            .cart-total {
+                @apply font-semibold text-lg text-gray-900 dark:text-white;
+            }
+
+            .cart-price,
+            .cart-item-total {
+                 @apply font-semibold;
+            }
+
+            .cart-subtotal,
+            .cart-shipping {
+                 @apply text-gray-700 dark:text-gray-300;
+            }
+
+
+            .cart-buttons {
+                @apply mt-8 flex flex-col sm:flex-row justify-end space-y-4 sm:space-y-0 sm:space-x-4;
+            }
+
+            .cart-buttons a,
+            .cart-buttons button {
+                @apply block text-center py-3 px-6 rounded-md font-semibold transition-all duration-300 ease-in-out;
+            }
+
+            .btn-checkout {
+                 @apply bg-green-600 text-white hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600;
+            }
+
+            .btn-update-cart {
+                 @apply bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500;
+            }
+
+            .empty-cart-message {
+                @apply text-center text-xl text-gray-600 dark:text-gray-400 py-12;
+            }
+
+            .continue-shopping-link {
+                 @apply inline-block mt-6 text-light-primary dark:text-dark-primary hover:underline font-semibold;
+            }
+
+            .shipping-calculator {
+                @apply mt-8 p-6 bg-light-bg-alt dark:bg-dark-bg-alt rounded-lg shadow-inner;
+            }
+
+            .shipping-calculator label {
+                @apply block mb-3 font-semibold text-gray-700 dark:text-gray-300;
+            }
+
+            .shipping-calculator input[type="text"] {
+                @apply px-3 py-2 border rounded-md mr-2 dark:bg-dark-card-bg dark:border-gray-600 text-light-text dark:text-dark-text;
+            }
+
+             .shipping-calculator button {
+                 @apply bg-light-secondary text-white py-2 px-4 rounded-md font-semibold hover:bg-light-primary dark:hover:bg-dark-primary;
+             }
+
+             .shipping-calculator .estimated-shipping {
+                 @apply mt-3 font-semibold text-gray-900 dark:text-white;
+             }
+
+             .checkout-steps {
+                @apply flex justify-center space-x-2 sm:space-x-4 mb-12 text-gray-500 dark:text-gray-400 text-sm sm:text-base;
+            }
+
+            .checkout-steps .step {
+                @apply flex flex-col sm:flex-row items-center text-center sm:text-left;
+            }
+
+            .checkout-steps .step .number {
+                @apply w-8 h-8 flex justify-center items-center border-2 border-gray-500 dark:border-gray-400 rounded-full mr-0 sm:mr-2 mb-1 sm:mb-0 font-bold;
+            }
+
+             .checkout-steps .step.active {
+                 @apply text-light-primary dark:text-dark-primary font-semibold;
+             }
+
+             .checkout-steps .step.active .number {
+                 @apply border-light-primary text-light-primary dark:border-dark-primary dark:text-dark-primary bg-light-primary/10 dark:bg-dark-primary/10;
+             }
+
+             .checkout-steps .step:not(:last-child):after {
+                 content: '';
+                 @apply block w-8 h-px bg-gray-400 dark:bg-gray-600 ml-2 sm:ml-4 mt-2 sm:mt-0;
+             }
+
+            #cart-summary {
+                @apply mt-8 p-6 bg-light-card-bg dark:bg-dark-card-bg rounded-lg shadow-lg max-w-sm ml-auto;
+            }
+
+            #cart-summary .cart-section-title {
+                 @apply !text-xl !mb-4;
+            }
+
+
+            /* --- Estilos Específicos de Productos/Categorías (products.html, gorras.html, etc.) --- */
+
+            /* Category Navigation on Products page */
+            #category-nav {
+                @apply mb-12 text-center;
+            }
+
+            #category-nav h3 {
+                @apply text-2xl font-bold mb-4 text-light-primary dark:text-dark-primary;
+            }
+
+            #category-nav ul {
+                @apply flex flex-wrap justify-center gap-4;
+            }
+
+            #category-nav li {
+                @apply inline-block;
+            }
+
+            #category-nav a {
+                @apply inline-block bg-light-bg-alt dark:bg-dark-bg-alt text-light-text dark:text-dark-text py-2 px-6 rounded-full font-semibold transition-colors duration-300 ease-in-out hover:bg-light-primary hover:text-white dark:hover:bg-dark-primary dark:hover:text-dark-text;
+            }
+
+            /* Style to hide the full product list initially */
+            #full-product-list {
+                display: none; /* Hide this div by default */
+            }
+
+            /* --- Estilos Específicos de Mi Cuenta (account.html) --- */
+            /* (Ya definidos arriba en esta misma etiqueta style) */
+             .account-section-title {
+                 @apply text-2xl font-bold mb-6 text-light-primary dark:text-dark-primary;
+            }
+
+            .account-card {
+                @apply bg-light-card-bg rounded-lg p-6 shadow-md mb-6 dark:bg-dark-card-bg;
+            }
+
+            .account-form label {
+                @apply block mb-2 font-semibold text-gray-700 dark:text-gray-300;
+            }
+
+            .account-form input[type="text"],
+            .account-form input[type="email"],
+            .account-form input[type="password"] {
+                @apply w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 dark:bg-dark-bg-alt text-light-text dark:text-dark-text focus:ring focus:ring-light-primary dark:focus:ring-dark-primary mb-4;
+            }
+
+            .account-form button {
+                @apply bg-light-primary text-white py-2 px-4 rounded-md hover:bg-light-secondary dark:bg-dark-primary dark:hover:bg-dark-secondary font-semibold transition-colors duration-300 ease-in-out;
+            }
+
+            .order-table {
+                @apply w-full table-auto border-collapse;
+            }
+
+            .order-table th,
+            .order-table td {
+                @apply border-b border-gray-200 dark:border-gray-700 px-4 py-3 text-left;
+            }
+
+            .order-table th {
+                @apply font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-dark-bg-alt;
+            }
+
+             .order-table tbody tr:hover {
+                 @apply bg-gray-50 dark:bg-dark-card-bg;
+             }
+
+            /* Estilos para los enlaces de acción dentro de la tabla de pedidos */
+            .order-table td a {
+                @apply text-light-primary dark:text-dark-primary hover:underline;
+            }
+
+            /* Estilo para el botón de eliminar cuenta */
+            #settings .bg-red-500 {
+               @apply hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-600 font-semibold;
+            }
+
+            /* Estilo para el botón de cerrar sesión */
+            #logout .bg-blue-500 {
+               @apply hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 font-semibold;
+            }
+
+
+        } /* Cierre de @layer components */
+    </style>
+</head>
+
+<body class="font-sans">
+
+    <header id="main-header" class="py-3 md:py-4">
+        <div class="container mx-auto px-4 flex flex-wrap justify-between items-center">
+            <h1 id="logo">
+                <a href="index.html#inicio">
+                    <img src="Logosublimarce.jpg" alt="Logo Sublimarce"
+                        style="max-height: 50px; border-radius: 50%; filter: hue-rotate(210deg);">
+                </a>
+            </h1>
+            <button id="mobileMenuButton"
+                class="md:hidden p-2 rounded-md text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-inset focus:ring-light-primary dark:focus:ring-dark-primary">
+                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+            <nav id="mainNav"
+                class="w-full md:w-auto hidden md:flex flex-col md:flex-row md:items-center mt-4 md:mt-0 space-y-2 md:space-y-0 md:space-x-2">
+                <ul class="flex flex-col md:flex-row items-center">
+                    <li><a href="index.html#inicio" class="block md:inline-block active">Inicio</a></li> <li><a href="products.html" class="block md:inline-block">Productos</a></li>
+                    <li><a href="index.html#nosotros" class="block md:inline-block">Nosotros</a></li>
+                    <li><a href="index.html#como-pedir" class="block md:inline-block">¿Cómo Pedir?</a></li>
+                    <li><a href="index.html#contacto" class="block md:inline-block">Contacto</a></li>
+                    </ul>
+                <button id="darkModeToggle" aria-label="Toggle Dark Mode" class="ml-0 md:ml-4 mt-2 md:mt-0">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun" style="display:none;"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio"
+            class="relative h-screen flex flex-col justify-center items-center text-center section-padding-top">
+            <div class="container mx-auto px-4 z-10">
+                <h2 class="hero-title">SUBLIMARCE</h2>
+                <p class="slogan">Tus ideas hechas realidad en productos personalizados.</p>
+                <a href="#productos-destacados" class="cta-button">Explorar Productos</a>
+            </div>
+            <div class="absolute inset-0 bg-black opacity-50 z-0"></div>
+        </section>
+
+        <section id="productos-destacados" class="py-12 md:py-20 bg-light-bg-alt dark:bg-dark-bg-alt">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">Productos Destacados</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="product-card">
+                        <img src="gorranegra.webp" alt="Gorra Negra Trucker">
+                        <h3>Gorra Negra Trucker</h3>
+                        <p>Estilo clásico trucker con malla trasera. Ideal para personalizar con tu logo o diseño.</p>
+                        <p class="precio">$25.000</p>
+                        <a href="index.html#contacto" class="btn-consultar">Consultar</a>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://placehold.co/300x200/cccccc/333333?text=Taza+Personalizada" alt="Taza Personalizada">
+                        <h3>Taza de Cerámica Estándar</h3>
+                        <p>Taza de cerámica blanca de alta calidad lista para tu diseño.</p>
+                        <p class="precio">$18.000</p>
+                        <a href="index.html#contacto" class="btn-consultar">Consultar</a>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://placehold.co/300x200/DEB887/000000?text=Llavero+Madera" alt="Llavero de madera personalizado">
+                        <h3>Llavero de Madera</h3>
+                        <p>Detalle rústico y original, grabado con tu diseño.</p>
+                        <p class="precio">$8.000</p>
+                        <a href="index.html#contacto" class="btn-consultar">Consultar</a>
+                    </div>
+                </div>
+                 <p class="nota-precios text-center mt-8">(*) Precios de referencia, pueden variar.</p> <div class="mt-10">
+                     <a href="products.html" class="cta-button">Ver Todo el Catálogo</a>
+                 </div>
+            </div>
+        </section>
+
+        <section id="nosotros" class="py-12 md:py-20 bg-light-bg dark:bg-dark-bg">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">Sobre Nosotros</h2>
+                <p class="max-w-2xl mx-auto text-lg">
+                    Somos un emprendimiento dedicado a la sublimación de productos personalizados. Nacimos de la pasión
+                    por convertir ideas en objetos únicos y especiales. Nos esforzamos por ofrecer productos de alta
+                    calidad y un servicio cercano y personalizado a cada cliente.
+                </p>
+            </div>
+        </section>
+
+        <section id="como-pedir" class="py-12 md:py-20 bg-light-bg-alt dark:bg-dark-bg-alt">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">¿Cómo Pedir?</h2>
+                <ul class="steps-list max-w-2xl mx-auto text-left">
+                    <li>
+                        <span>1</span>
+                        <p><strong>Explora nuestro catálogo:</strong> Navega por nuestras categorías de productos y
+                            encuentra lo que buscas.</p>
+                    </li>
+                    <li>
+                        <span>2</span>
+                        <p><strong>Contáctanos con tu idea:</strong> Envíanos tu diseño, logo o la idea que tienes a
+                            través de WhatsApp o email.</p>
+                    </li>
+                    <li>
+                        <span>3</span>
+                        <p><strong>Recibe una cotización:</strong> Te enviaremos un presupuesto detallado y una
+                            simulación de cómo quedaría tu producto.</p>
+                    </li>
+                    <li>
+                        <span>4</span>
+                        <p><strong>Confirmación y producción:</strong> Una vez que apruebes el diseño y el presupuesto,
+                            iniciaremos la producción.</p>
+                    </li>
+                    <li>
+                        <span>5</span>
+                        <p><strong>Entrega:</strong> Coordinamos la entrega o envío de tus productos personalizados.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contacto" class="py-12 md:py-20 bg-light-bg dark:bg-dark-bg">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">Contacto</h2>
+                <p class="max-w-2xl mx-auto text-lg mb-8">
+                    ¿Tienes una idea o necesitas una cotización? ¡Contáctanos!
+                </p>
+                <div class="contact-info text-lg">
+                    <p class="mb-3"><i class="fab fa-whatsapp"></i> <a href="https://wa.me/5491133223802"
+                            target="_blank">+54 9 11 3322-3802</a></p>
+                    <p class="mb-3"><i class="fas fa-phone"></i> <a href="tel:+541133223802">(+54) 11 3322-3802</a></p>
+                    <p class="mb-6"><i class="fas fa-envelope"></i> <a
+                            href="mailto:sublimarce@gmail.com">sublimarce@gmail.com</a></p>
+                </div>
+                <div class="social-media my-8">
+                    <a href="https://instagram.com/sublimarce.arg" target="_blank" aria-label="Instagram"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/people/Sublimarcearg/100088128799547/#" target="_blank"
+                        aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container mx-auto px-4 text-center">
+            <p class="copyright">© <span id="currentYearFooter"></span> Sublimarce | Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            const moonIcon = darkModeToggle.querySelector('.fa-moon');
+            const sunIcon = darkModeToggle.querySelector('.fa-sun');
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mainNav = document.getElementById('mainNav');
+            const headerHeight = document.getElementById('main-header').offsetHeight; // Get header height
+
+            // Function to enable/disable dark mode
+            function setDarkMode(isDark) {
+                if (isDark) {
+                    body.classList.add('dark');
+                    moonIcon.style.display = 'none';
+                    sunIcon.style.display = 'inline-block';
+                } else {
+                    body.classList.remove('dark');
+                    moonIcon.style.display = 'inline-block';
+                    sunIcon.style.display = 'none';
+                }
+                localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+            }
+
+            // Check saved preference or system preference
+            const savedMode = localStorage.getItem('darkMode');
+            const prefersDarkScheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedMode === 'enabled') {
+                setDarkMode(true);
+            } else if (savedMode === 'disabled') {
+                setDarkMode(false);
+            } else {
+                setDarkMode(prefersDarkScheme);
+            }
+
+            darkModeToggle.addEventListener('click', () => {
+                setDarkMode(!body.classList.contains('dark'));
+            });
+
+            // Toggle for mobile menu
+            mobileMenuButton.addEventListener('click', () => {
+                mainNav.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking a link
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) { // Tailwind's md breakpoint
+                        mainNav.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Update year in copyright
+            const currentYearFooterSpan = document.getElementById('currentYearFooter');
+            if (currentYearFooterSpan) {
+                currentYearFooterSpan.textContent = new Date().getFullYear();
+            }
+
+            // Smooth scroll for internal links
+            const internalLinks = document.querySelectorAll('a[href^="#"]');
+            internalLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId !== '#') {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Active link in nav on scroll
+            const sections = document.querySelectorAll('section[id]');
+            const headerNavLinks = document.querySelectorAll('#main-header nav a');
+            let lastActiveLink = null;
+
+            function changeNavOnScroll() {
+                let fromTop = window.scrollY + headerHeight + 50; // +50 para un mejor umbral
+                let currentActiveLink = null;
+
+                sections.forEach(section => {
+                    // Check if the section is in the viewport, considering the header height
+                    if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+                        currentActiveLink = document.querySelector(`#main-header nav a[href='index.html#${section.id}']`);
+                         // Fallback for href="#section" if index.html is omitted
+                         if (!currentActiveLink) {
+                             currentActiveLink = document.querySelector(`#main-header nav a[href='#${section.id}']`);
+                         }
+                    }
+                });
+
+                // Remove 'active' class from all links first
+                 headerNavLinks.forEach(link => link.classList.remove('active'));
+
+                // Add 'active' class to the current active link
+                if (currentActiveLink) {
+                    currentActiveLink.classList.add('active');
+                } else {
+                     // If no section is in view (e.g., between sections or at the very top/bottom)
+                     // You might want to handle this case, e.g., keep the last active or make 'Inicio' active at the top
+                     // For now, if no section matches, no link will be active based on scroll.
+                     // Re-add 'active' to 'Inicio' if at the very top
+                      if (window.scrollY < 50) { // Small threshold for the top
+                         const inicioLink = document.querySelector('#main-header nav a[href="index.html#inicio"]');
+                          if (inicioLink) {
+                             inicioLink.classList.add('active');
+                          }
+                      }
+                }
+
+                lastActiveLink = currentActiveLink;
+
+                 // Ensure links to other pages (products.html) are not activated by scroll on index page
+                 headerNavLinks.forEach(link => {
+                    if (link.getAttribute('href') === 'products.html') {
+                        // Remove active class if scroll logic incorrectly applies it
+                        link.classList.remove('active');
+                    }
+                 });
+
+            }
+
+            window.addEventListener('scroll', changeNavOnScroll);
+            changeNavOnScroll(); // Call once on load
+
+            // Set "Inicio" as active initially if at the top
+            if (window.scrollY < headerHeight + 50) {
+                 const inicioLink = document.querySelector('#main-header nav ul li a[href="index.html#inicio"]');
+                 if (inicioLink) {
+                    inicioLink.classList.add('active');
+                 }
+             }
+
+
+        });
+    </script>
+</body>
+
+</html>
